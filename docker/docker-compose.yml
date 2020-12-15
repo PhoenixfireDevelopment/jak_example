@@ -1,0 +1,34 @@
+version: '3.3'
+services:
+  jak_example:
+    image: jak_example
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+      args:
+        - RAILS_ENV=development
+    env_file:
+      - .secrets.env
+    volumes:
+      - ../:/app/src
+      - ~/.ssh:/root/.ssh
+      - jak_example_bundle_cache:/bundle
+    depends_on:
+      - jak_example_db
+    entrypoint: ["/app/src/entrypoint.sh"]
+    command: /bin/sh -c 'bin/rails s -b 0.0.0.0 -p 3000'
+    ports:
+      - "3000:3000"
+
+  jak_example_db:
+    image: mariadb
+    volumes:
+      - jak_example_db_volume:/var/lib/mysql
+    env_file:
+      - .secrets.env
+    ports:
+      - "13373:3306"
+
+volumes:
+  jak_example_bundle_cache:
+  jak_example_db_volume:
