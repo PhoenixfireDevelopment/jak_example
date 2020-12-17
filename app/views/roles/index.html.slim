@@ -1,0 +1,24 @@
+- title "Company: [#{@company.to_s}] - #{Role.model_name.human.pluralize}", true, {fa_icon: 'bullhorn'}
+
+- content_for(:toolbar) do
+  .toolbar
+    = link_to main_app.new_company_role_path(@company), class: 'btn btn-primary btn-sm', title: "New #{Role.model_name.human}" do
+      = fa_icon "plus", class: 'mr-2'
+      | New #{Role.model_name.human}
+
+.table-products.section
+  table.table.table-striped.table-hover#roles_index_table*{data: {source: company_roles_url(@company, format: :json), display_length: Role.default_per_page}}
+    thead
+      tr
+        th.name
+          = Role.human_attribute_name(:name)
+        th.key
+          = Role.human_attribute_name(:key)
+        th.company
+          = Role.human_attribute_name(:company)
+        th.created_at = Role.human_attribute_name(:created_at)
+        th.updated_at = Role.human_attribute_name(:updated_at)
+        th.actions.actions.nosort
+          span.line
+          Actions
+    tbody

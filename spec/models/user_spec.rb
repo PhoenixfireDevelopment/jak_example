@@ -48,4 +48,12 @@ RSpec.describe User, type: :model do
       expect(build(:user, first_name: 'Mark', last_name: 'Holmberg').to_s).to eql('Mark Holmberg')
     end
   end
+
+  describe 'concerning associations' do
+    it 'belongs to a company' do
+      company = create(:company)
+      user = create(:user, company: company)
+      expect(user.company).to eql(company)
+    end
+  end
 end

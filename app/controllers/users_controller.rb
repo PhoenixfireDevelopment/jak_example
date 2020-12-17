@@ -78,8 +78,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  # TODO: scope this under current_tenant
   def safe_params
     safe_attributes = [
+      :company_id,
       :first_name,
       :last_name,
       :email,

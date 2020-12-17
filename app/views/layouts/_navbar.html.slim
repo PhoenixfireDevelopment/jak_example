@@ -11,6 +11,10 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
           = fa_icon "tachometer", class: "fa-1x mr-2"
           | Dashboard
 
+        = active_link_to companies_path, class: 'nav-link', active: ["companies"], wrap_tag: :li do
+          = fa_icon "building-o", class: "fa-1x mr-2"
+          | Companies
+
         = active_link_to users_path, class: 'nav-link', active: ["users"], wrap_tag: :li do
           = fa_icon "users", class: "fa-1x mr-2"
           | Users

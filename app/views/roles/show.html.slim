@@ -1,0 +1,38 @@
+- title "Company: #{@company.to_s} - #{Role.model_name.human.pluralize} : [#{@role.to_s}]", true, {fa_icon: 'bullhorn'}
+
+- content_for(:toolbar) do
+  .toolbar
+    = link_to company_roles_path(@company), class: 'btn btn-outline-primary mr-3', title: "All #{Role.model_name.human.pluralize}" do
+      = fa_icon "arrow-left", class: 'mr-2'
+      | All #{Role.model_name.human.pluralize}
+
+    = link_to edit_company_role_path(@company, @role), class: 'btn btn-warning', title: "Edit #{Role.model_name.human}" do
+      = fa_icon "pencil-square-o", class: 'mr-2'
+      | Edit #{Role.model_name.human}
+
+.card
+  .card-header
+    = fa_icon "file-o", class: 'mr-2'
+    | General Information
+  .card-body
+    .table-responsive
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            th= Role.human_attribute_name(:id)
+            td= @role.id
+          tr
+            th= Role.human_attribute_name(:name)
+            td= @role.name
+          tr
+            th= Role.human_attribute_name(:key)
+            td= @role.key
+          tr
+            th= Role.human_attribute_name(:company)
+            td= link_to @role.company.to_s, @company
+          tr
+            th= Role.human_attribute_name(:created_at)
+            td= pl(@role.created_at, format: :long)
+          tr
+            th= Role.human_attribute_name(:updated_at)
+            td= pl(@role.updated_at, format: :long)

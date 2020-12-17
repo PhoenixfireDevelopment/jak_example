@@ -1,0 +1,22 @@
+- title "#{Company.model_name.human.pluralize}", true, {fa_icon: 'building-o'}
+
+- content_for(:toolbar) do
+  .toolbar
+    = link_to main_app.new_company_path, class: 'btn btn-primary btn-sm', title: "New #{Company.model_name.human}" do
+      = fa_icon "plus", class: 'mr-2'
+      | New #{Company.model_name.human}
+
+.table-products.section
+  table.table.table-striped.table-hover#companies_index_table*{data: {source: companies_url(format: :json), display_length: Company.default_per_page}}
+    thead
+      tr
+        th.name
+          = Company.human_attribute_name(:name)
+        th.active
+          = Company.human_attribute_name(:active)
+        th.created_at = Company.human_attribute_name(:created_at)
+        th.updated_at = Company.human_attribute_name(:updated_at)
+        th.actions.actions.nosort
+          span.line
+          Actions
+    tbody

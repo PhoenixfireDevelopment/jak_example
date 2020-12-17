@@ -1,0 +1,42 @@
+- title "#{Company.model_name.human} : [#{@company.to_s}]", true, {fa_icon: 'building-o'}
+
+- content_for(:sidebar) do
+  = link_to companies_path, class: 'btn btn-block btn-outline-primary mr-3', title: "All #{Company.model_name.human.pluralize}" do
+    = fa_icon "arrow-left", class: 'mr-2'
+    | All #{Company.model_name.human.pluralize}
+
+  = link_to edit_company_path(@company), class: 'btn btn-block btn-warning', title: "Edit #{Company.model_name.human}" do
+    = fa_icon "pencil-square-o", class: 'mr-2'
+    | Edit #{Company.model_name.human}
+
+  hr
+
+  = link_to company_roles_url(@company), class: 'btn btn-outline-secondary btn-block', title: "#{Role.model_name.human.pluralize}" do
+    = fa_icon "bullhorn", class: 'mr-2'
+    | #{Role.model_name.human.pluralize}
+
+  hr
+
+.card
+  .card-header
+    = fa_icon "file-o", class: 'mr-2'
+    | General Information
+  .card-body
+    .table-responsive
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            th= Company.human_attribute_name(:id)
+            td= @company.id
+          tr
+            th= Company.human_attribute_name(:name)
+            td= @company.name
+          tr
+            th= Company.human_attribute_name(:active)
+            td= boolean_indicator(@company, :active)
+          tr
+            th= Company.human_attribute_name(:created_at)
+            td= pl(@company.created_at, format: :long)
+          tr
+            th= Company.human_attribute_name(:updated_at)
+            td= pl(@company.updated_at, format: :long)

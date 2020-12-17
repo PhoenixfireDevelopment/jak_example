@@ -1,0 +1,14 @@
+= simple_form_for(@company) do |f|
+  = f.error_notification
+
+  .card
+    .card-header
+      = fa_icon "file-o", class: 'mr-2'
+      | General Information
+    .card-body
+      = f.input :name
+      = f.input :active, as: :boolean, input_html: { class: 'mr-3' }
+
+    .card-footer
+      = f.button :submit, class: 'btn btn-primary btn-sm'
+      = link_to 'Cancel', @company, class: 'btn btn-link btn-sm'

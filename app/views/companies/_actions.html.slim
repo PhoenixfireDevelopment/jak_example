@@ -1,0 +1,12 @@
+.btn-toolbar
+  = link_to main_app.company_roles_path(company), title: "View #{Role.model_name.human.pluralize}", class: 'btn btn-info btn-sm mr-3' do
+    = fa_icon "bullhorn", class: 'fa-1x'
+
+  = link_to main_app.company_path(company), title: "View #{Company.model_name.human}", class: 'btn btn-secondary btn-sm mr-3' do
+    = fa_icon "eye", class: 'fa-1x'
+
+  = link_to main_app.edit_company_path(company), title: "Edit #{Company.model_name.human}", class: 'btn btn-warning btn-sm mr-3' do
+    = fa_icon "pencil-square-o", class: 'fa-1x'
+
+  = link_to main_app.company_path(company), data: {method: :delete, confirm: 'Are you sure?'}, title: "Remove #{Company.model_name.human}", class: 'btn btn-danger btn-sm mr-3' do
+    = fa_icon "remove", class: 'fa-1x'

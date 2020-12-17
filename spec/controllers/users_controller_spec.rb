@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  let(:company) { create(:company) }
   let(:user) { create(:user) }
 
   before do
@@ -12,7 +13,7 @@ RSpec.describe UsersController, type: :controller do
   # User. As you add validations to User, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) do
-    attributes_for(:user)
+    attributes_for(:user).merge(company_id: company.id)
   end
 
   let(:invalid_attributes) do

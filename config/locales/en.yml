@@ -5,6 +5,7 @@ en:
     created_at: 'Created'
     updated_at: 'Updated'
     uuid: 'UUID'
+    id: 'ID'
   date:
     formats:
       default: "%m/%d/%Y"
@@ -23,6 +24,11 @@ en:
     models:
       user: 'User'
     attributes:
+      company:
+        name: 'Name'
+        active: 'Active'
+        company: 'Company'
+        company_id: 'Company ID'
       user:
         current_password: "Current Password"
         current_sign_in_at: "Current Sign In At"
