@@ -1,0 +1,3 @@
+= simple_form_for :search, url: '#', method: :get, html: { id: "leads_search_filter", class: 'mr-2' }, wrapper: :filter do |f|
+  = f.simple_fields_for :filter do |k|
+    = k.input :assignable, as: :select, collection: @company.users.ordered.map { |k| [k.to_s, k.to_s] }, label: false, include_blank: 'Assignable', input_html: { class: 'mb-3' }, selected: (params[:search][:filter].try(:[], :assignable) if params[:search].try(:[], :filter).present?)

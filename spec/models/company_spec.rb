@@ -35,6 +35,12 @@ RSpec.describe Company, type: :model do
       role_2 = create(:role, company: company)
       expect(company.roles).to match_array([role_1, role_2])
     end
+
+    it 'has many leads' do
+      lead_1 = create(:lead, company: company)
+      lead_2 = create(:lead, company: company)
+      expect(company.leads).to match_array([lead_1, lead_2])
+    end
   end
 
   describe 'concerning ActiveRecord callbacks' do
@@ -50,6 +56,12 @@ RSpec.describe Company, type: :model do
       role = create(:role, company: company)
       company.destroy
       expect { role.reload }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'nukes the leads' do
+      lead = create(:lead, company: company)
+      company.destroy
+      expect { lead.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

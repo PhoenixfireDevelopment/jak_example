@@ -1,0 +1,29 @@
+- title "Company: [#{@company.to_s}] - #{Lead.model_name.human.pluralize}", true, {fa_icon: 'male'}
+
+- content_for(:sidebar) do
+  = link_to main_app.new_company_lead_path(@company), class: 'btn btn-primary btn-sm', title: "New #{Lead.model_name.human}" do
+    = fa_icon "plus", class: 'mr-2'
+    | New #{Lead.model_name.human}
+
+  hr
+  h6
+    = fa_icon 'filter', class: 'mr-2'
+    | Filter
+  == render 'leads/filters'
+
+.table-products.section
+  table.table.table-striped.table-hover#leads_index_table*{data: {source: company_leads_url(@company, format: :json), display_length: Lead.default_per_page}}
+    thead
+      tr
+        th.name
+          = Lead.human_attribute_name(:name)
+        th.assignable
+          = Lead.human_attribute_name(:assignable)
+        th.company
+          = Lead.human_attribute_name(:company)
+        th.created_at = Lead.human_attribute_name(:created_at)
+        th.updated_at = Lead.human_attribute_name(:updated_at)
+        th.actions.actions.nosort
+          span.line
+          Actions
+    tbody

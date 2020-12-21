@@ -1,5 +1,8 @@
 .btn-toolbar
-  = link_to main_app.company_roles_path(company), title: "View #{Role.model_name.human.pluralize}", class: 'btn btn-info btn-sm mr-3' do
+  = link_to main_app.company_leads_path(company), title: "View #{Lead.model_name.human.pluralize}", class: 'btn btn-info btn-sm mr-3' do
+    = fa_icon "male", class: 'fa-1x'
+
+  = link_to main_app.company_roles_path(company), title: "View #{Role.model_name.human.pluralize}", class: 'btn btn-outline-info btn-sm mr-3' do
     = fa_icon "bullhorn", class: 'fa-1x'
 
   = link_to main_app.company_path(company), title: "View #{Company.model_name.human}", class: 'btn btn-secondary btn-sm mr-3' do

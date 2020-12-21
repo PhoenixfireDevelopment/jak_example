@@ -15,6 +15,10 @@
     = fa_icon "bullhorn", class: 'mr-2'
     | #{Role.model_name.human.pluralize}
 
+  = link_to company_leads_url(@company), class: 'btn btn-outline-info btn-block', title: "#{Lead.model_name.human.pluralize}" do
+    = fa_icon "male", class: 'mr-2'
+    | #{Lead.model_name.human.pluralize}
+
   hr
 
 .card

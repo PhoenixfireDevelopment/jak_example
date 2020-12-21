@@ -1,0 +1,35 @@
+- title "Company: [#{@company.to_s}] - #{Lead.model_name.human} : [#{@lead.to_s}]", true, {fa_icon: 'male'}
+
+- content_for(:toolbar) do
+  .toolbar
+    = link_to company_leads_path(@company), class: 'btn btn-outline-primary mr-3', title: "All #{Lead.model_name.human.pluralize}" do
+      = fa_icon "arrow-left", class: 'mr-2'
+      | All #{Lead.model_name.human.pluralize}
+
+    = link_to edit_company_lead_path(@company, @lead), class: 'btn btn-warning', title: "Edit #{Lead.model_name.human}" do
+      = fa_icon "pencil-square-o", class: 'mr-2'
+      | Edit #{Lead.model_name.human}
+
+.card
+  .card-header
+    = fa_icon "file-o", class: 'mr-2'
+    | General Information
+  .card-body
+    .table-responsive
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            th= Lead.human_attribute_name(:name)
+            td= @lead.name
+          tr
+            th= Lead.human_attribute_name(:assignable)
+            td= @lead.assignable
+          tr
+            th= Lead.human_attribute_name(:company)
+            td= @lead.company
+          tr
+            th= Lead.human_attribute_name(:created_at)
+            td= pl(@lead.created_at, format: :long)
+          tr
+            th= Lead.human_attribute_name(:updated_at)
+            td= pl(@lead.updated_at, format: :long)

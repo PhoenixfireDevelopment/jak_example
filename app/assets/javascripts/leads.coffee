@@ -4,19 +4,19 @@
 
 # Tie our new resource into Datatables
 jQuery ->
-  $('#application_layout #roles_index_table').dataTable
-    iDisplayLength: $("#application_layout #roles_index_table").data("displayLength")
+  $('#application_layout #leads_index_table').dataTable
+    iDisplayLength: $("#application_layout #leads_index_table").data("displayLength")
     aLengthMenu: [[10, 25, 50, 100], ["10", "25", "50", "100"]]
     sPaginationType: "full_numbers"
     paging: true,
     autoWidth: false
     bJQueryUI: true
     bPaginate: true
-    sAjaxSource: $('#application_layout #roles_index_table').data('source')
+    sAjaxSource: $('#application_layout #leads_index_table').data('source')
     responsive: true
     aoColumns: [
       { mData: 'name'},
-      { mData: 'key'},
+      { mData: 'assignable'},
       { mData: 'company'},
       { mData: 'created_at' },
       { mData: 'updated_at' },
@@ -26,3 +26,11 @@ jQuery ->
         bSortable: false,
         aTargets: ['nosort']
     }]
+
+    initComplete: ->
+      # Assignable
+      assignable_column = @api().columns('.assignable')
+      $ele = $("form#leads_search_filter select#search_filter_assignable").on 'change', ->
+        val = $.fn.dataTable.util.escapeRegex($(this).val())
+        assignable_column.search( val ? '^'+val+'$' : '', true, false ).draw()
+        return

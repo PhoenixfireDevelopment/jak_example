@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :companies do
     resources :roles
+    resources :leads
   end
 
   devise_for :users, path: 'u'
