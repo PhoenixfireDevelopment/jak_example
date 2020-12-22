@@ -55,5 +55,34 @@ RSpec.describe User, type: :model do
       user = create(:user, company: company)
       expect(user.company).to eql(company)
     end
+
+    it 'has many leads' do
+      user = create(:user)
+      lead_1 = create(:lead, company: user.company, assignable: user)
+      lead_2 = create(:lead, company: user.company, assignable: user)
+      expect(user.leads).to match_array([lead_1, lead_2])
+    end
+  end
+
+  describe 'concerning ActiveRecord callbacks' do
+    let(:company) { create(:company) }
+
+    it 'nukes the users' do
+      user = create(:user, company: company)
+      company.destroy
+      expect { user.reload }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'nukes the roles' do
+      role = create(:role, company: company)
+      company.destroy
+      expect { role.reload }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it 'nukes the leads' do
+      lead = create(:lead, company: company)
+      company.destroy
+      expect { lead.reload }.to raise_error(ActiveRecord::RecordNotFound)
+    end
   end
 end

@@ -12,6 +12,7 @@
       = f.input :password, required: true, hint: 'A secure password', placeholder: 'my_secure_password123'
       = f.input :password_confirmation, required: true, hint: 'A secure password confirmation', placeholder: 'my_secure_password123'
       = f.input :company, as: :select, collection: Company.all, include_blank: 'Select Company'
+      = f.input :role_ids, collection: @user.company.roles.ordered.map { |k| [k.name.titleize, k.id] }, as: :check_boxes, label: false
 
     .card-footer
       = f.button :submit, class: 'btn btn-primary btn-sm'

@@ -45,23 +45,12 @@ RSpec.describe Company, type: :model do
 
   describe 'concerning ActiveRecord callbacks' do
     let(:company) { create(:company) }
+    let(:user) { create(:user, company: company) }
 
-    it 'nukes the users' do
-      user = create(:user, company: company)
-      company.destroy
-      expect { user.reload }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-
-    it 'nukes the roles' do
-      role = create(:role, company: company)
-      company.destroy
-      expect { role.reload }.to raise_error(ActiveRecord::RecordNotFound)
-    end
-
-    it 'nukes the leads' do
-      lead = create(:lead, company: company)
-      company.destroy
-      expect { lead.reload }.to raise_error(ActiveRecord::RecordNotFound)
+    it 'nullifies the leads assignable_id' do
+      lead = create(:lead, company: company, assignable: user)
+      user.destroy
+      expect { lead.reload }.to change(lead, :assignable_id).from(user.id).to(nil)
     end
   end
 end

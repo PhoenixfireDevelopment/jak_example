@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   belongs_to :company
 
+  has_many :leads, foreign_key: 'assignable_id', dependent: :nullify
+
   validates :first_name, :last_name, presence: true
   validates :email, format: { with: Rails.application.config.email_regex }
 
