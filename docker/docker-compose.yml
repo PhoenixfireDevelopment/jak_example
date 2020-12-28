@@ -15,6 +15,7 @@ services:
       - jak_example_bundle_cache:/bundle
     depends_on:
       - jak_example_db
+      - jak_example_mongo
     entrypoint: ["/app/src/entrypoint.sh"]
     command: /bin/sh -c 'bin/rails s -b 0.0.0.0 -p 3000'
     ports:
@@ -29,6 +30,16 @@ services:
     ports:
       - "13373:3306"
 
+  jak_example_mongo:
+    image: mongo
+    command: --quiet
+    restart: always
+    volumes:
+      - jak_example_mongo_data:/data/db
+    env_file:
+      - .secrets.env
+
 volumes:
   jak_example_bundle_cache:
   jak_example_db_volume:
+  jak_example_mongo_data:

@@ -19,6 +19,10 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-3
           = fa_icon "users", class: "fa-1x mr-2"
           | All Users
 
+        = active_link_to jak.root_path(format: :json), class: 'nav-link', active: ["jak/permissions"], wrap_tag: :li do
+          = fa_icon "lock", class: "fa-1x mr-2"
+          | Jak Permissions
+
         li.nav-item.dropdown
           a#navbarDropdownMenuLink.nav-link.dropdown-toggle[href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
             = fa_icon "cog", class: 'fa-1x mr-2'
