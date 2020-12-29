@@ -1,14 +1,17 @@
 = simple_form_for([@company, @lead]) do |f|
   = f.error_notification
 
-  .card
-    .card-header
-      = fa_icon "file-o", class: 'mr-2'
-      | General Information
-    .card-body
-      = f.input :name
-      = f.association :assignable, as: :select, collection: @company.users, include_blank: 'Select User'
+  .row
+    .col-md-6
+      .card
+        .card-header
+          = fa_icon "file-o", class: 'mr-2'
+          | General Information
+        .card-body
+          = f.input :name, placeholder: 'The full name of the Lead'
+          = f.association :assignable, as: :select, collection: @company.users, include_blank: 'Assign to User'
 
-    .card-footer
+  .card.mt-3
+    .card-body
       = f.button :submit, class: 'btn btn-primary btn-sm'
       = link_to 'Cancel', [@company, @lead], class: 'btn btn-link btn-sm'

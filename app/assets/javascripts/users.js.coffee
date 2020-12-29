@@ -13,6 +13,7 @@ jQuery ->
       { mData: 'last_name' },
       { mData: 'first_name' },
       { mData: 'email' },
+      { mData: 'company' },
       { mData: 'sign_in_count' },
       { mData: 'created_at' },
       { mData: 'updated_at' },
@@ -22,3 +23,11 @@ jQuery ->
         bSortable: false,
         aTargets: ['nosort']
     }]
+
+    initComplete: ->
+      # Company a User belongs to
+      company_column = @api().columns('.company')
+      $ele = $("form#users_search_filter select#search_filter_company").on 'change', ->
+        val = $.fn.dataTable.util.escapeRegex($(this).val())
+        company_column.search( val ? '^'+val+'$' : '', true, false ).draw()
+        return

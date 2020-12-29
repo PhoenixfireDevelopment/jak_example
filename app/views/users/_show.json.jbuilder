@@ -3,7 +3,7 @@ json.cache! [user] do
   json.first_name user.first_name
   json.email user.email
   json.sign_in_count user.sign_in_count
-  json.company user.company
+  json.company user.company.to_s
   json.created_at pl(user.created_at, format: :long)
   json.updated_at pl(user.updated_at, format: :long)
   json.actions render(partial: 'users/actions', locals: { user: user }, formats: [:html])

@@ -1,14 +1,17 @@
-= simple_form_for([@company, @role]) do |f|
+= simple_form_for [@company, @role], wrapper: :horizontal_form do |f|
   = f.error_notification
 
-  .card
-    .card-header
-      = fa_icon "file-o", class: 'mr-2'
-      | General Information
-    .card-body
-      = f.input :name
-      = f.input :key
+  .row
+    .col-md-6
+      .card
+        .card-header
+          = fa_icon "file-o", class: 'mr-2'
+          | General Information
+        .card-body
+          = f.input :name, hint: 'A unique name for the Job Role'
+          = f.input :key, hint: 'Leave blank to auto-generate'
 
-    .card-footer
+  .card.mt-3
+    .card-body
       = f.button :submit, class: 'btn btn-primary btn-sm'
       = link_to 'Cancel', [@company, @role], class: 'btn btn-link btn-sm'

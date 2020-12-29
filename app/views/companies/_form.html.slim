@@ -1,14 +1,17 @@
-= simple_form_for(@company) do |f|
+= simple_form_for @company, wrapper: :horizontal_form do |f|
   = f.error_notification
 
-  .card
-    .card-header
-      = fa_icon "file-o", class: 'mr-2'
-      | General Information
-    .card-body
-      = f.input :name
-      = f.input :active, as: :boolean, input_html: { class: 'mr-3' }
+  .row
+    .col-md-6
+      .card
+        .card-header
+          = fa_icon "file-o", class: 'mr-2'
+          | General Information
+        .card-body
+          = f.input :name, placeholder: 'The name of the Company'
+          = f.input :active, as: :boolean, input_html: { class: 'mr-3' }, hint: 'Is this Company currently active in doing business?'
 
-    .card-footer
+  .card.mt-3
+    .card-body
       = f.button :submit, class: 'btn btn-primary btn-sm'
       = link_to 'Cancel', @company, class: 'btn btn-link btn-sm'

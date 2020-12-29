@@ -4,7 +4,8 @@
 SimpleForm.setup do |config|
   config.error_notification_class = 'alert alert-danger'
   config.button_class             = 'btn btn-default btn-sm'
-  config.boolean_label_class      = nil
+  config.boolean_label_class      = 'boolean_label_class_bootstrap'
+  config.input_class = 'mr-3'
 
   config.wrappers :filter, tag: 'div', class: 'input-group', error_class: 'has-error' do |b|
     b.use :html5
@@ -13,7 +14,7 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'control-label'
+    b.use :label, class: 'form-label'
 
     b.use :input, class: 'form-control'
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
@@ -27,7 +28,7 @@ SimpleForm.setup do |config|
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'control-label'
+    b.use :label, class: 'form-label'
 
     b.use :input, class: 'form-control'
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
@@ -39,7 +40,7 @@ SimpleForm.setup do |config|
     b.use :placeholder
     b.optional :maxlength
     b.optional :readonly
-    b.use :label, class: 'control-label'
+    b.use :label, class: 'form-label'
 
     b.use :input
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
@@ -50,31 +51,32 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
 
-    b.wrapper tag: 'div', class: 'checkbox' do |ba|
-      ba.use :label_input
+    b.wrapper tag: 'div', class: 'checkbox vertical_boolean' do |ba|
+      ba.use :label_input, class: 'vertical_boolean_label_input'
     end
 
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block text-info' }
   end
 
-  config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  # This is for the whole container, not necessarily the individual elements
+  config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-group vertical_radio_and_checkboxes', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
-    b.use :label, class: 'control-label'
+    b.use :label, class: 'form-label'
     b.use :input
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block text-info' }
   end
 
-  config.wrappers :horizontal_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :horizontal_form, tag: 'div', class: 'form-group row', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
     b.optional :pattern
     b.optional :min_max
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 control-label'
+    b.use :label, class: 'col-sm-3 form-label'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input, class: 'form-control'
@@ -88,7 +90,7 @@ SimpleForm.setup do |config|
     b.use :placeholder
     b.optional :maxlength
     b.optional :readonly
-    b.use :label, class: 'col-sm-3 control-label'
+    b.use :label, class: 'col-sm-3 form-label'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input
@@ -102,7 +104,7 @@ SimpleForm.setup do |config|
     b.optional :readonly
 
     b.wrapper tag: 'div', class: 'col-sm-offset-3 col-sm-9' do |wr|
-      wr.wrapper tag: 'div', class: 'checkbox d-block' do |ba|
+      wr.wrapper tag: 'div', class: 'checkbox d-block horizontal_boolean' do |ba|
         ba.use :label_input, class: 'col-sm-9'
       end
 
@@ -115,7 +117,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.optional :readonly
 
-    b.use :label, class: 'col-sm-3 control-label'
+    b.use :label, class: 'col-sm-3 form-label'
 
     b.wrapper tag: 'div', class: 'col-sm-9' do |ba|
       ba.use :input
